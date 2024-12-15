@@ -1,14 +1,11 @@
-# build stage
-FROM node:lts-alpine AS build-stage
+FROM node:18
 WORKDIR /app
 COPY package*.json ./
 RUN npm install
 COPY . .
 RUN npm run build
-
-# production stage
-FROM nginx:stable-alpine AS production-stage
-COPY --from=build-stage /app/dist /usr/share/nginx/html
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+RUN cp -r build /app
 EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+
+# 빌드된 React 애플리케이션 실행
+CMD ["npx", "serve", "build"]
