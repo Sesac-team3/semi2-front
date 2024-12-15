@@ -46,3 +46,7 @@ jobs:
       - name: Push Docker image to Docker Hub
         run: |
           docker push ${{ secrets.DOCKER_USERNAME }}/${{ env.DOCKER_IMAGE_TAG_NAME }}:latest
+
+      # 8. QEMU(Quick Emulator)를 설정
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
