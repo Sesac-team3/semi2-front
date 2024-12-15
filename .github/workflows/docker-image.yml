@@ -33,7 +33,7 @@ jobs:
       # 5. Dockerfile을 사용하여 Docker 이미지 빌드
       - name: Build Docker image
         run: |
-          docker build . --file Dockerfile --tag ${{ secrets.DOCKER_USERNAME }}/${{ env.DOCKER_IMAGE_TAG_NAME }}:latest .
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/${{ env.DOCKER_IMAGE_TAG_NAME }}:latest .
 
       # 6. Docker Hub 로그인
       - name: Log in to Docker Hub
@@ -46,6 +46,3 @@ jobs:
       - name: Push Docker image to Docker Hub
         run: |
           docker push ${{ secrets.DOCKER_USERNAME }}/${{ env.DOCKER_IMAGE_TAG_NAME }}:latest
-
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
