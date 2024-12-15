@@ -16,7 +16,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      # 2. Node.js 환경 설정 (버전 17 사용)
+      # 2. Node.js 환경 설정 (버전 16 사용)
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
@@ -31,9 +31,15 @@ jobs:
         run: npm run build
 
       # 5. Dockerfile을 사용하여 Docker 이미지 빌드
+      - name: Set Docker Tag
+        run: |
+          DOCKER_TAG="${{ secrets.DOCKER_USERNAME }}/${{ env.DOCKER_IMAGE_TAG_NAME }}:latest"
+          echo "Docker tag: $DOCKER_TAG" # 태그 확인
+
       - name: Build Docker image
         run: |
-          docker build . --file Dockerfile --tag ${{ secrets.DOCKER_USERNAME }}/${{ env.DOCKER_IMAGE_TAG_NAME }}:latest
+          DOCKER_TAG="${{ secrets.DOCKER_USERNAME }}/${{ env.DOCKER_IMAGE_TAG_NAME }}:latest"
+          docker build . --file Dockerfile --tag $DOCKER_TAG
 
       # 6. Docker Hub 로그인
       - name: Log in to Docker Hub
@@ -45,7 +51,8 @@ jobs:
       # 7. Docker 이미지 푸시
       - name: Push Docker image to Docker Hub
         run: |
-          docker push ${{ secrets.DOCKER_USERNAME }}/${{ env.DOCKER_IMAGE_TAG_NAME }}:latest
+          DOCKER_TAG="${{ secrets.DOCKER_USERNAME }}/${{ env.DOCKER_IMAGE_TAG_NAME }}:latest"
+          docker push $DOCKER_TAG
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
