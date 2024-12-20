@@ -146,41 +146,6 @@ h2 {
   transform: translateY(-2px);
 }
 
-.social-login {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  margin-top: 25px;
-}
-
-.btn-social {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 15px;
-  padding: 15px;
-  transition: transform 0.3s;
-}
-
-.btn-social:hover {
-  transform: translateY(-2px);
-}
-
-.btn-google {
-  background-color: #db4437;
-  color: white;
-}
-
-.btn-kakao {
-  background-color: #fee500;
-  color: #000000;
-}
-
-.btn-naver {
-  background-color: #03c75a;
-  color: white;
-}
-
 .register-link {
   text-align: center;
   margin-top: 30px;
