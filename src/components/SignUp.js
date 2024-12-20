@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './SignUp.css';
 import { useNavigate } from 'react-router-dom';
-import axios from "axios";
+import axios from "../axios";
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -28,7 +28,7 @@ const Signup = () => {
     }
 
     try {
-      const response = await axios.post('http://localhost:8080/api/signup', {
+      const response = await axios.post('/signup', {
         username,
         password
       });
@@ -36,7 +36,7 @@ const Signup = () => {
       if (response.status === 200) {
         alert('회원가입이 완료되었습니다!');
         console.log('회원가입 시도:', { username, email, password });
-        navigate('/login');  // 로그인 페이지로 이동
+        navigate('/');
       }
     } catch (error) {
       // 오류 처리
@@ -107,9 +107,12 @@ const Signup = () => {
         <div className="social-login">
           <p>또는</p>
           <div className="social-buttons">
-            <button className="social-btn google-btn" onClick={() => socialLogin('Google')}>Google로 시작하기</button>
-            <button className="social-btn kakao-btn" onClick={() => socialLogin('Kakao')}>카카오로 시작하기</button>
-            <button className="social-btn naver-btn" onClick={() => socialLogin('Naver')}>네이버로 시작하기</button>
+            <button className="social-btn btn-google"
+                    onClick={() => socialLogin('Google')}>Google로 시작하기</button>
+            <button className="social-btn btn-kakao"
+                    onClick={() => socialLogin('Kakao')}>카카오로 시작하기</button>
+            <button className="social-btn btn-naver"
+                    onClick={() => socialLogin('Naver')}>네이버로 시작하기</button>
           </div>
         </div>
         <div className="login-link">
