@@ -4,7 +4,7 @@ import axios from "../axios";
 
 const Board = () => {
   const [currentImages, setCurrentImages] = useState(0);
-  const [gridImages, setGridImages] = useState([]); // 렌더링할 아이템 목록
+  const [gridImages, setGridImages] = useState([]);
   const itemsPerLoad = 6;
   const maxItems = 18;
 
@@ -13,7 +13,7 @@ const Board = () => {
     if (currentImages >= maxItems) return;
 
     try {
-      const response = await axios.get("/board", {
+      const response = await axios.get("/boards", {
         params: {
           start: currentImages,
           limit: itemsPerLoad,
